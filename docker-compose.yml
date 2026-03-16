@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  scrapling-api:
+    build: .
+    container_name: scrapling-api
+    ports:
+      - "8899:8899"
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Optional: give more memory for browser-based scraping
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 2G
