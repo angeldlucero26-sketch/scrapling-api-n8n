@@ -174,7 +174,7 @@ async def scrape_website(req: ScrapeRequest) -> ScrapeResponse:
         # ── Fetch main page ──
         if req.stealth:
             page = await asyncio.to_thread(
-                StealthyFetcher.fetch, url, headless=True, timeout=req.timeout
+                StealthyFetcher.fetch, url, headless=True, timeout=req.timeout * 1000
             )
         else:
             page = await asyncio.to_thread(
@@ -215,7 +215,7 @@ async def scrape_website(req: ScrapeRequest) -> ScrapeResponse:
                     logger.info(f"  Scraping subpage: {sub_url}")
                     if req.stealth:
                         sub_page = await asyncio.to_thread(
-                            StealthyFetcher.fetch, sub_url, headless=True, timeout=req.timeout
+                            StealthyFetcher.fetch, sub_url, headless=True, timeout=req.timeout * 1000
                         )
                     else:
                         sub_page = await asyncio.to_thread(
