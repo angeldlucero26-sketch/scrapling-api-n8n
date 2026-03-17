@@ -2,6 +2,9 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+# Force Playwright to install browsers in a global, accessible path
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
 # Install system deps for Scrapling's browser features
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
@@ -11,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Playwright browsers and dependencies
+# Install Playwright browsers and dependencies directly
 RUN playwright install chromium
 RUN playwright install-deps chromium
 
