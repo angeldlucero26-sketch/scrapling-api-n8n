@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install Playwright browsers and dependencies
+RUN playwright install chromium
+RUN playwright install-deps chromium
+
 # Install Scrapling's browser dependencies (Camoufox for StealthyFetcher)
 RUN python -m scrapling install || true
 
